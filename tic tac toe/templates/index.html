@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+  <h2>Add todo</h2>
+  <form action="/" method="POST">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Enter your Todo</label>
+      <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="Add Todo Title">
+
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input type="text" name="desc" class="form-control" id="exampleInputPassword1" placeholder="Add description">
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark btn-sm">Submit</button>
+  </form>
+
+</div>
+
+
+
+<div class="container my-4">
+  {% if alltodo|length==0 %}
+  <div class="alert alert-dark" role="alert">
+   No recodrs Add your first Todo
+  </div>
+{% else %}
+<h4>Your Todos</h4>
+  
+ 
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sno</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in alltodo %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.desc}}</td>
+        <td>{{todo.date}}</td>
+        <td>
+          <a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-dark btn-sm ">Delete</a>
+          <a href="/update/{{todo.sno}}" class="btn btn-outline-dark btn-sm ">Update</button>
+        </td>
+      </tr>
+      {% endfor %}
+      {%endif%}
+    </tbody>
+  </table>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock body %}
